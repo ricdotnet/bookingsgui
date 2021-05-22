@@ -548,6 +548,7 @@ public class Main extends javax.swing.JFrame {
         newBookingTimeInput.setText("");
         
         newBookingFrame.setVisible(false);
+        newBookingWarningMessage.setText("");
                         
     }//GEN-LAST:event_newBookingConfirmButtonActionPerformed
 
@@ -560,6 +561,7 @@ public class Main extends javax.swing.JFrame {
         newBookingTimeInput.setText("");
         
         newBookingFrame.setVisible(false);
+        newBookingWarningMessage.setText("");
     }//GEN-LAST:event_newBookingCancelButtonActionPerformed
 
     /**
