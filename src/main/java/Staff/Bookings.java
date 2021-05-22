@@ -21,8 +21,6 @@ public class Bookings {
     public void addBooking(String memberId, String memberName, String bookingDate, String bookingTime) {
         int newBookingId = Integer.parseInt(bookingList.get(bookingList.size()-1).getBookingId()) + 1;
         bookingList.add(new BookingConstructor(String.valueOf(newBookingId),memberId, memberName, bookingDate, bookingTime));
-
-        System.out.println(newBookingId);
     }
 
     public String[] bookingsIds() {
