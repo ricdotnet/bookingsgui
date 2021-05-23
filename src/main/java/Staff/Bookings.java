@@ -10,8 +10,6 @@ public class Bookings {
     public void populate() {
         bookingList.add(new BookingConstructor("1", "123456789", "Ricardo", "20/5/21", "18:00"));
         bookingList.add(new BookingConstructor("2","321654987", "Adriana", "20/5/21", "17:00"));
-        bookingList.add(new BookingConstructor("3","147258369", "Raphael", "20/5/21", "15:00"));
-        bookingList.add(new BookingConstructor("4","159487263", "John", "20/5/21", "22:00"));
     }
 
     public List<BookingConstructor> getBookings() {

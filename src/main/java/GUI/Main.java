@@ -8,6 +8,8 @@ package GUI;
 import Staff.*;
 
 import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -27,12 +29,16 @@ public class Main extends javax.swing.JFrame {
     private String newBookingTime;
 
     private Boolean staffExists = false;
+    private Boolean memberExists;
+
+    Timer timer = new Timer();
 
     /**
      * Object from Staff class
      */
     Staff staff = new Staff();
     Bookings bookings = new Bookings();
+    Members members = new Members();
 
     /**
      * Creates new form Main
@@ -44,6 +50,7 @@ public class Main extends javax.swing.JFrame {
          */
         staff.populate();
         bookings.populate();
+        members.populate();
         
         initComponents();
     }
@@ -71,6 +78,7 @@ public class Main extends javax.swing.JFrame {
         newBookingMemberIdLabel = new javax.swing.JLabel();
         createNewBookingTitle = new javax.swing.JLabel();
         newBookingWarningMessage = new javax.swing.JLabel();
+        fetchUserButton = new javax.swing.JButton();
         loginPanel = new javax.swing.JPanel();
         staffNumberLabel = new javax.swing.JLabel();
         staffNumberInput = new javax.swing.JTextField();
@@ -102,6 +110,7 @@ public class Main extends javax.swing.JFrame {
         newBookingDateLabel.setText("Booking Date:");
 
         newBookingConfirmButton.setText("Confirm");
+        newBookingConfirmButton.setEnabled(false);
         newBookingConfirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newBookingConfirmButtonActionPerformed(evt);
@@ -111,6 +120,12 @@ public class Main extends javax.swing.JFrame {
         newBookingTimeLabel.setText("Booking Time:");
 
         newBookingMemberNameLabel.setText("Member Name:");
+
+        newBookingDateInput.setEditable(false);
+
+        newBookingMemberNameInput.setEditable(false);
+
+        newBookingTimeInput.setEditable(false);
 
         newBookingCancelButton.setText("Cancel");
         newBookingCancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -189,23 +204,39 @@ public class Main extends javax.swing.JFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
+        fetchUserButton.setText("Get Member");
+        fetchUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fetchUserButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout newBookingFrameLayout = new javax.swing.GroupLayout(newBookingFrame.getContentPane());
         newBookingFrame.getContentPane().setLayout(newBookingFrameLayout);
         newBookingFrameLayout.setHorizontalGroup(
             newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(newBookingFrameLayout.createSequentialGroup()
-                .addGap(0, 34, Short.MAX_VALUE)
+                .addGap(0, 35, Short.MAX_VALUE)
                 .addGroup(newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(newBookingWarningMessage)
-                    .addComponent(newBookingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 103, Short.MAX_VALUE))
+                    .addGroup(newBookingFrameLayout.createSequentialGroup()
+                        .addComponent(newBookingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(fetchUserButton)))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
         newBookingFrameLayout.setVerticalGroup(
             newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(newBookingFrameLayout.createSequentialGroup()
-                .addGap(0, 57, Short.MAX_VALUE)
-                .addComponent(newBookingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newBookingFrameLayout.createSequentialGroup()
+                        .addGap(0, 57, Short.MAX_VALUE)
+                        .addComponent(newBookingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(newBookingFrameLayout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(fetchUserButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(newBookingWarningMessage)
                 .addGap(0, 122, Short.MAX_VALUE))
         );
@@ -584,6 +615,53 @@ public class Main extends javax.swing.JFrame {
         newBookingWarningMessage.setText("");
     }//GEN-LAST:event_newBookingCancelButtonActionPerformed
 
+    private void fetchUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fetchUserButtonActionPerformed
+        // TODO add your handling code here:
+        memberExists = false;
+
+        //timer task to reset warning message
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                newBookingWarningMessage.setText("");
+            }
+        };
+        timer.schedule(task, 4000);
+
+        newBookingMemberId = newBookingMemberIdInput.getText();
+
+        if(newBookingMemberId.trim().isEmpty()) {
+            newBookingWarningMessage.setText("Please enter a Member ID.");
+            return;
+        }
+
+        members.membersList.forEach( (member) -> {
+            if(member.getMemberId().equals(newBookingMemberId)) {
+                newBookingMemberNameInput.setText(member.getMemberName());
+                newBookingDateInput.setEditable(true);
+                newBookingDateInput.setText("__/__/__");
+                newBookingTimeInput.setEditable(true);
+                newBookingTimeInput.setText("__:__");
+                newBookingConfirmButton.setEnabled(true);
+
+                memberExists = true;
+            }
+        });
+
+        if(!memberExists) {
+            newBookingWarningMessage.setText("No member found with that ID.");
+            newBookingMemberNameInput.setText("");
+            newBookingDateInput.setEditable(false);
+            newBookingDateInput.setText("");
+            newBookingTimeInput.setEditable(false);
+            newBookingTimeInput.setText("");
+            newBookingConfirmButton.setEnabled(false);
+            return;
+        }
+
+
+    }//GEN-LAST:event_fetchUserButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -635,6 +713,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel currentUserLabel;
     private javax.swing.JTextField emailInput;
     private javax.swing.JLabel emailLabel;
+    private javax.swing.JButton fetchUserButton;
     private javax.swing.JTextField firstNameInput;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JTextField lastNameInput;
