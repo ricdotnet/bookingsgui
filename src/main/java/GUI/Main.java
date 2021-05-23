@@ -452,18 +452,15 @@ public class Main extends javax.swing.JFrame {
             warnMessage.setText("Wrong Secret Code. Has to be a number.");
             return;
         }
-        
-        for(StaffConstructor staff : staff.staffList) {
-            if(staff.getStaffID() == staffId && staff.getSecretCode() == secretCode) {
 
+        staff.staffList.forEach( (staff) -> {
+            if(staff.getStaffID() == staffId && staff.getSecretCode() == secretCode) {
                 firstName = staff.getFirstName();
                 lastName = staff.getLastName();
                 email = staff.getEmail();
-
                 staffExists = true;
-                break;
             }
-        }
+        });
 
         if(!staffExists) {
             warnMessage.setText("No user found with those details");
