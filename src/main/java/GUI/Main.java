@@ -20,6 +20,12 @@ public class Main extends javax.swing.JFrame {
     private String firstName;
     private String lastName;
     private String email;
+
+    private String newBookingMemberId;
+    private String newBookingMemberName;
+    private String newBookingDate;
+    private String newBookingTime;
+
     private Boolean staffExists = false;
 
     /**
@@ -508,21 +514,38 @@ public class Main extends javax.swing.JFrame {
 
     private void newBookingConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBookingConfirmButtonActionPerformed
         // TODO add your handling code here:
+
+        newBookingMemberId = newBookingMemberIdInput.getText();
+        newBookingMemberName = newBookingMemberNameInput.getText();
+        newBookingDate = newBookingDateInput.getText();
+        newBookingTime = newBookingTimeInput.getText();
         
-        if(newBookingMemberIdInput.getText().isEmpty()) {
+        if(newBookingMemberId.trim().isEmpty()) {
             newBookingWarningMessage.setText("Please enter a Member ID.");
             return;
         }
-        if(newBookingMemberNameInput.getText().isEmpty()) {
+        if(newBookingMemberName.trim().isEmpty()) {
             newBookingWarningMessage.setText("Please enter a Member Name.");
             return;
         }
-        if(newBookingDateInput.getText().isEmpty()) {
+        if(newBookingDate.trim().isEmpty()) {
             newBookingWarningMessage.setText("Please enter a date.");
             return;
         }
-        if(newBookingTimeInput.getText().isEmpty()) {
+        if(newBookingTime.trim().isEmpty()) {
             newBookingWarningMessage.setText("Please enter a time.");
+            return;
+        }
+
+        // date and time format checker
+        String datePattern = "[0-9]{2}\\/[0-9]{2}\\/[0-9]{2}";
+        String hourPattern = "[0-9]{2}\\:[0-9]{2}";
+        if(!newBookingDate.matches(datePattern)) {
+            newBookingWarningMessage.setText("Invalid date format. 00/00/00");
+            return;
+        }
+        if(!newBookingTime.matches(hourPattern)) {
+            newBookingWarningMessage.setText("Invalid time format. 00:00");
             return;
         }
         
