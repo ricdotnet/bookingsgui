@@ -6,6 +6,7 @@
 package GUI;
 
 import Staff.*;
+import java.awt.Color;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -685,6 +686,7 @@ public class Main extends javax.swing.JFrame {
         
         newBookingFrame.setVisible(false);
         newBookingWarningMessage.setText("");
+        memberValid.setText("");
     }//GEN-LAST:event_newBookingCancelButtonActionPerformed
 
     private void fetchUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fetchUserButtonActionPerformed
@@ -716,8 +718,17 @@ public class Main extends javax.swing.JFrame {
                     newBookingTimeInput.setEditable(true);
                     newBookingTimeInput.setText("__:__");
                     newBookingConfirmButton.setEnabled(true);
+                    memberValid.setText("Active Member.");
+                    memberValid.setForeground(new java.awt.Color(0, 128, 9));
                 } else {
                     memberValid.setText("Inactive Member.");
+                    memberValid.setForeground(new java.awt.Color(255, 0, 51));
+                    newBookingMemberNameInput.setText("");
+                    newBookingDateInput.setEditable(false);
+                    newBookingDateInput.setText("");
+                    newBookingTimeInput.setEditable(false);
+                    newBookingTimeInput.setText("");
+                    newBookingConfirmButton.setEnabled(false);
                 }
                 
                 memberExists = true;
