@@ -25,7 +25,8 @@ public class Bookings {
 
         String[] ids = new String[bookingList.size()];
         for(int i = 0; i < bookingList.size(); i++) {
-            ids[i] = bookingList.get(i).getBookingId() + " -> " + bookingList.get(i).getMemberId() + " :: " + bookingList.get(i).getMemberName();
+            ids[i] = bookingList.get(i).getBookingId() + " -> " + bookingList.get(i).getMemberId() + " :: " + bookingList.get(i).getMemberName()
+                    + " :: " + bookingList.get(i).getBookingDate()+ " :: " + bookingList.get(i).getBookingTime();
         }
 
         return ids;
