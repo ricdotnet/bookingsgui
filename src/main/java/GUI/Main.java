@@ -6,7 +6,6 @@
 package GUI;
 
 import Staff.*;
-import java.awt.Color;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -109,6 +108,7 @@ public class Main extends javax.swing.JFrame {
         bookingsListPanel = new javax.swing.JScrollPane();
         bookingsList = new javax.swing.JList<>();
         removeBookingButton = new javax.swing.JButton();
+        rankLabel = new javax.swing.JLabel();
 
         newBookingFrame.setTitle("New Booking");
         newBookingFrame.setMinimumSize(new java.awt.Dimension(550, 430));
@@ -353,7 +353,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(mainWindowTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(staffNumberInput)
                     .addComponent(secretCodeInput))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         loginPanelLayout.setVerticalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,7 +376,7 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(warnMessage))
                         .addGap(30, 30, 30))
                     .addComponent(quitButton))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         staffPanel.setSize(new java.awt.Dimension(670, 0));
@@ -434,6 +434,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        rankLabel.setFont(new java.awt.Font("Fira Code", 0, 18)); // NOI18N
+        rankLabel.setForeground(new java.awt.Color(51, 153, 0));
+        rankLabel.setText("rank");
+
         javax.swing.GroupLayout staffPanelLayout = new javax.swing.GroupLayout(staffPanel);
         staffPanel.setLayout(staffPanelLayout);
         staffPanelLayout.setHorizontalGroup(
@@ -444,8 +448,11 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(lastNameLabel)
                     .addComponent(currentUserLabel)
                     .addComponent(firstNameLabel)
-                    .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(logoutButton)
+                    .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(staffPanelLayout.createSequentialGroup()
+                            .addComponent(rankLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(logoutButton))
                         .addGroup(staffPanelLayout.createSequentialGroup()
                             .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(staffIdLabel)
@@ -499,7 +506,9 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(emailLabel)
                             .addComponent(emailInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(logoutButton)))
+                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(logoutButton)
+                            .addComponent(rankLabel))))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(newBookingButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -568,6 +577,7 @@ public class Main extends javax.swing.JFrame {
                 firstName = staff.getFirstName();
                 lastName = staff.getLastName();
                 email = staff.getEmail();
+                rankLabel.setText(staff.getRank());
                 staffExists = true;
                 warnMessage.setText("");
             }
@@ -861,6 +871,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel newBookingTimeLabel;
     private javax.swing.JLabel newBookingWarningMessage;
     private javax.swing.JButton quitButton;
+    private javax.swing.JLabel rankLabel;
     private javax.swing.JButton removeBookingButton;
     private javax.swing.JPasswordField secretCodeInput;
     private javax.swing.JLabel secretCodeLabel;
