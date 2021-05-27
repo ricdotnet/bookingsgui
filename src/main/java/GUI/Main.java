@@ -722,7 +722,7 @@ public class Main extends javax.swing.JFrame {
         members.membersList.forEach( (member) -> {
             if(member.getMemberId().equals(newBookingMemberId)) {
                 if(member.getMemberStatus()) {
-                    newBookingMemberNameInput.setText(member.getMemberName());
+                    newBookingMemberNameInput.setText(member.getFirstName());
                     newBookingDateInput.setEditable(true);
                     newBookingDateInput.setText("__/__/__");
                     newBookingTimeInput.setEditable(true);
@@ -755,8 +755,6 @@ public class Main extends javax.swing.JFrame {
             newBookingConfirmButton.setEnabled(false);
             return;
         }
-
-
     }//GEN-LAST:event_fetchUserButtonActionPerformed
 
     private void confirmBookingSuccessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBookingSuccessActionPerformed

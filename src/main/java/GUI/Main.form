@@ -415,7 +415,7 @@
                       </Group>
                       <Component id="quitButton" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="41" max="32767" attributes="0"/>
+                  <EmptySpace pref="49" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -476,9 +476,6 @@
     </Container>
     <Container class="javax.swing.JPanel" name="staffPanel">
       <Properties>
-        <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[670, 0]"/>
-        </Property>
         <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
       </Properties>
 
