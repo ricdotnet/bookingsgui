@@ -77,9 +77,17 @@ public class Main extends javax.swing.JFrame {
         confirmPaid = new javax.swing.JCheckBox();
         fetchUserButton = new javax.swing.JButton();
         memberValid = new javax.swing.JLabel();
-        newBookingWarningMessage = new javax.swing.JLabel();
         newBookingConfirmButton = new javax.swing.JButton();
         newBookingCancelButton = new javax.swing.JButton();
+        newBookingFirstNameLabel = new javax.swing.JLabel();
+        newBookingLastNameLabel = new javax.swing.JLabel();
+        newBookingJoinedInLabel = new javax.swing.JLabel();
+        newBookingPostCodeLabel = new javax.swing.JLabel();
+        newBookingWarningMessage = new javax.swing.JLabel();
+        memberFirstName = new javax.swing.JLabel();
+        memberLastName = new javax.swing.JLabel();
+        memberJoinedDate = new javax.swing.JLabel();
+        memberPostCode = new javax.swing.JLabel();
         bookingSuccessMessage = new javax.swing.JDialog();
         bookedTitle = new javax.swing.JLabel();
         confirmBookingSuccess = new javax.swing.JButton();
@@ -111,7 +119,14 @@ public class Main extends javax.swing.JFrame {
         rankLabel = new javax.swing.JLabel();
 
         newBookingFrame.setTitle("New Booking");
-        newBookingFrame.setMinimumSize(new java.awt.Dimension(550, 430));
+        newBookingFrame.setBounds(new java.awt.Rectangle(0, 25, 550, 480));
+        newBookingFrame.setMinimumSize(new java.awt.Dimension(550, 460));
+        newBookingFrame.setPreferredSize(new java.awt.Dimension(531, 460));
+        newBookingFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                newBookingFrameWindowClosing(evt);
+            }
+        });
 
         newBookingDateLabel.setText("Booking Date:");
 
@@ -157,7 +172,7 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(newBookingPanelLayout.createSequentialGroup()
                                 .addComponent(newBookingTimeLabel)
                                 .addGap(6, 6, 6)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
                         .addGroup(newBookingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(newBookingMemberNameInput)
                             .addComponent(newBookingDateInput)
@@ -173,19 +188,20 @@ public class Main extends javax.swing.JFrame {
             .addGroup(newBookingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(newBookingPanelLayout.createSequentialGroup()
                     .addGap(8, 8, 8)
-                    .addComponent(createNewBookingTitle)
-                    .addGap(33, 33, 33))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newBookingPanelLayout.createSequentialGroup()
-                    .addGap(8, 8, 8)
-                    .addComponent(newBookingMemberIdLabel)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
-                    .addComponent(newBookingMemberIdInput, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                    .addGroup(newBookingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(newBookingPanelLayout.createSequentialGroup()
+                            .addComponent(createNewBookingTitle)
+                            .addGap(33, 33, 33))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newBookingPanelLayout.createSequentialGroup()
+                            .addComponent(newBookingMemberIdLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
+                            .addComponent(newBookingMemberIdInput, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap()))))
         );
         newBookingPanelLayout.setVerticalGroup(
             newBookingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newBookingPanelLayout.createSequentialGroup()
-                .addContainerGap(89, Short.MAX_VALUE)
+                .addContainerGap(90, Short.MAX_VALUE)
                 .addGroup(newBookingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fetchUserButton)
                     .addComponent(memberValid))
@@ -214,9 +230,6 @@ public class Main extends javax.swing.JFrame {
                     .addContainerGap(168, Short.MAX_VALUE)))
         );
 
-        newBookingWarningMessage.setFont(new java.awt.Font("Fira Code", 0, 14)); // NOI18N
-        newBookingWarningMessage.setForeground(new java.awt.Color(255, 0, 51));
-
         newBookingConfirmButton.setText("Confirm");
         newBookingConfirmButton.setEnabled(false);
         newBookingConfirmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -232,36 +245,82 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        newBookingFirstNameLabel.setText("First Name:");
+
+        newBookingLastNameLabel.setText("Last Name:");
+
+        newBookingJoinedInLabel.setText("Joined In:");
+
+        newBookingPostCodeLabel.setText("Post Code:");
+
+        newBookingWarningMessage.setFont(new java.awt.Font("Fira Code", 0, 14)); // NOI18N
+        newBookingWarningMessage.setForeground(new java.awt.Color(255, 0, 51));
+
         javax.swing.GroupLayout newBookingFrameLayout = new javax.swing.GroupLayout(newBookingFrame.getContentPane());
         newBookingFrame.getContentPane().setLayout(newBookingFrameLayout);
         newBookingFrameLayout.setHorizontalGroup(
             newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(newBookingFrameLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(newBookingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 37, Short.MAX_VALUE))
-            .addGroup(newBookingFrameLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addGroup(newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(newBookingFrameLayout.createSequentialGroup()
-                        .addComponent(newBookingConfirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(newBookingCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(newBookingWarningMessage))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(56, 56, 56)
+                        .addGroup(newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(newBookingPostCodeLabel)
+                            .addGroup(newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(newBookingFrameLayout.createSequentialGroup()
+                                    .addComponent(newBookingConfirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(40, 40, 40)
+                                    .addGroup(newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(newBookingFirstNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(newBookingLastNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                .addGroup(newBookingFrameLayout.createSequentialGroup()
+                                    .addComponent(newBookingCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(newBookingJoinedInLabel))))
+                        .addGap(18, 18, 18)
+                        .addGroup(newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(memberFirstName)
+                            .addComponent(memberLastName)
+                            .addComponent(memberJoinedDate)
+                            .addComponent(memberPostCode))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newBookingFrameLayout.createSequentialGroup()
+                        .addContainerGap(25, Short.MAX_VALUE)
+                        .addGroup(newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(newBookingWarningMessage)
+                            .addComponent(newBookingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         newBookingFrameLayout.setVerticalGroup(
             newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(newBookingFrameLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(newBookingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(newBookingWarningMessage)
-                .addGap(27, 27, 27)
-                .addGroup(newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(newBookingConfirmButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(newBookingCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newBookingFrameLayout.createSequentialGroup()
+                        .addGroup(newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newBookingFirstNameLabel)
+                            .addComponent(memberFirstName))
+                        .addGap(14, 14, 14)
+                        .addGroup(newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newBookingLastNameLabel)
+                            .addComponent(memberLastName))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newBookingJoinedInLabel)
+                            .addComponent(memberJoinedDate)))
+                    .addGroup(newBookingFrameLayout.createSequentialGroup()
+                        .addComponent(newBookingConfirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newBookingCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(newBookingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newBookingPostCodeLabel)
+                    .addComponent(memberPostCode))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         bookingSuccessMessage.setBackground(new java.awt.Color(204, 204, 255));
@@ -379,7 +438,6 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        staffPanel.setSize(new java.awt.Dimension(670, 0));
         staffPanel.setVerifyInputWhenFocusTarget(false);
 
         currentUserLabel.setFont(new java.awt.Font("Fira Code", 0, 18)); // NOI18N
@@ -630,6 +688,53 @@ public class Main extends javax.swing.JFrame {
         staffPanel.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
+    private void confirmBookingSuccessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBookingSuccessActionPerformed
+        // TODO add your handling code here:
+        
+        newBookingMemberIdInput.setText("");
+        newBookingMemberNameInput.setText("");
+        newBookingDateInput.setText("");
+        newBookingTimeInput.setText("");
+        
+        newBookingFrame.setVisible(false);
+        newBookingWarningMessage.setText("");
+        confirmPaid.setSelected(false);
+        
+        memberValid.setText("");
+        
+        memberFirstName.setText("");
+        memberLastName.setText("");
+        memberJoinedDate.setText("");
+        memberPostCode.setText("");
+        
+        bookingSuccessMessage.setVisible(false);
+    }//GEN-LAST:event_confirmBookingSuccessActionPerformed
+
+    private void removeBookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBookingButtonActionPerformed
+        // TODO add your handling code here:
+        bookings.bookingList.remove(bookingsList.getSelectedIndex());
+        
+        updateBookingList();
+    }//GEN-LAST:event_removeBookingButtonActionPerformed
+
+    private void newBookingCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBookingCancelButtonActionPerformed
+        // TODO add your handling code here:
+
+        newBookingMemberIdInput.setText("");
+        newBookingMemberNameInput.setText("");
+        newBookingDateInput.setText("");
+        newBookingTimeInput.setText("");
+
+        newBookingFrame.setVisible(false);
+        newBookingWarningMessage.setText("");
+        memberValid.setText("");
+        
+        memberFirstName.setText("");
+        memberLastName.setText("");
+        memberJoinedDate.setText("");
+        memberPostCode.setText("");
+    }//GEN-LAST:event_newBookingCancelButtonActionPerformed
+
     private void newBookingConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBookingConfirmButtonActionPerformed
         // TODO add your handling code here:
 
@@ -637,7 +742,7 @@ public class Main extends javax.swing.JFrame {
         newBookingMemberName = newBookingMemberNameInput.getText();
         newBookingDate = newBookingDateInput.getText();
         newBookingTime = newBookingTimeInput.getText();
-        
+
         if(newBookingMemberId.trim().isEmpty()) {
             newBookingWarningMessage.setText("Please enter a Member ID.");
             return;
@@ -666,38 +771,25 @@ public class Main extends javax.swing.JFrame {
             newBookingWarningMessage.setText("Invalid time format. 00:00");
             return;
         }
-        
+
         if(!confirmPaid.isSelected()) {
             newBookingWarningMessage.setText("Please confirm that the booking is paid for.");
             return;
         }
-        
+
         //add a new booking
         bookings.addBooking(
-                newBookingMemberIdInput.getText(),
-                newBookingMemberNameInput.getText(),
-                newBookingDateInput.getText(),
-                newBookingTimeInput.getText()
+            newBookingMemberIdInput.getText(),
+            newBookingMemberNameInput.getText(),
+            newBookingDateInput.getText(),
+            newBookingTimeInput.getText()
         );
-        
-        updateBookingList();
-        
-        bookingSuccessMessage.setVisible(true);
-                        
-    }//GEN-LAST:event_newBookingConfirmButtonActionPerformed
 
-    private void newBookingCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBookingCancelButtonActionPerformed
-        // TODO add your handling code here:
-        
-        newBookingMemberIdInput.setText("");
-        newBookingMemberNameInput.setText("");
-        newBookingDateInput.setText("");
-        newBookingTimeInput.setText("");
-        
-        newBookingFrame.setVisible(false);
-        newBookingWarningMessage.setText("");
-        memberValid.setText("");
-    }//GEN-LAST:event_newBookingCancelButtonActionPerformed
+        updateBookingList();
+
+        bookingSuccessMessage.setVisible(true);
+
+    }//GEN-LAST:event_newBookingConfirmButtonActionPerformed
 
     private void fetchUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fetchUserButtonActionPerformed
         // TODO add your handling code here:
@@ -722,14 +814,31 @@ public class Main extends javax.swing.JFrame {
         members.membersList.forEach( (member) -> {
             if(member.getMemberId().equals(newBookingMemberId)) {
                 if(member.getMemberStatus()) {
-                    newBookingMemberNameInput.setText(member.getFirstName());
-                    newBookingDateInput.setEditable(true);
-                    newBookingDateInput.setText("__/__/__");
-                    newBookingTimeInput.setEditable(true);
-                    newBookingTimeInput.setText("__:__");
-                    newBookingConfirmButton.setEnabled(true);
-                    memberValid.setText("Active Member.");
-                    memberValid.setForeground(new java.awt.Color(0, 128, 9));
+                    
+                    memberFirstName.setText(member.getFirstName());
+                    memberLastName.setText(member.getLastName());
+                    memberJoinedDate.setText(member.getJoinedDate());
+                    memberPostCode.setText(member.getPostCode());
+                    
+                    if(member.getOrganizerStatus()) {
+                        newBookingMemberNameInput.setText(member.getFirstName());
+                        newBookingDateInput.setEditable(true);
+                        newBookingDateInput.setText("__/__/__");
+                        newBookingTimeInput.setEditable(true);
+                        newBookingTimeInput.setText("__:__");
+                        newBookingConfirmButton.setEnabled(true);
+                        memberValid.setText("Active Member.");
+                        memberValid.setForeground(new java.awt.Color(0, 128, 9));
+                    } else {
+                        memberValid.setText("Not team organizer.");
+                        memberValid.setForeground(new java.awt.Color(255, 0, 51));
+                        newBookingMemberNameInput.setText("");
+                        newBookingDateInput.setEditable(false);
+                        newBookingDateInput.setText("");
+                        newBookingTimeInput.setEditable(false);
+                        newBookingTimeInput.setText("");
+                        newBookingConfirmButton.setEnabled(false);
+                    }
                 } else {
                     memberValid.setText("Inactive Member.");
                     memberValid.setForeground(new java.awt.Color(255, 0, 51));
@@ -740,7 +849,7 @@ public class Main extends javax.swing.JFrame {
                     newBookingTimeInput.setText("");
                     newBookingConfirmButton.setEnabled(false);
                 }
-                
+
                 memberExists = true;
             }
         });
@@ -753,31 +862,28 @@ public class Main extends javax.swing.JFrame {
             newBookingTimeInput.setEditable(false);
             newBookingTimeInput.setText("");
             newBookingConfirmButton.setEnabled(false);
+            memberValid.setText("");
             return;
         }
     }//GEN-LAST:event_fetchUserButtonActionPerformed
 
-    private void confirmBookingSuccessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBookingSuccessActionPerformed
+    private void newBookingFrameWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_newBookingFrameWindowClosing
         // TODO add your handling code here:
-        
+
         newBookingMemberIdInput.setText("");
         newBookingMemberNameInput.setText("");
         newBookingDateInput.setText("");
         newBookingTimeInput.setText("");
-        
+
         newBookingFrame.setVisible(false);
         newBookingWarningMessage.setText("");
-        confirmPaid.setSelected(false);
+        memberValid.setText("");
         
-        bookingSuccessMessage.setVisible(false);
-    }//GEN-LAST:event_confirmBookingSuccessActionPerformed
-
-    private void removeBookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBookingButtonActionPerformed
-        // TODO add your handling code here:
-        bookings.bookingList.remove(bookingsList.getSelectedIndex());
-        
-        updateBookingList();
-    }//GEN-LAST:event_removeBookingButtonActionPerformed
+        memberFirstName.setText("");
+        memberLastName.setText("");
+        memberJoinedDate.setText("");
+        memberPostCode.setText("");
+    }//GEN-LAST:event_newBookingFrameWindowClosing
 
     private void updateBookingList() {
         //update list
@@ -853,18 +959,26 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel loginPanel;
     private javax.swing.JButton logoutButton;
     private javax.swing.JLabel mainWindowTitle;
+    private javax.swing.JLabel memberFirstName;
+    private javax.swing.JLabel memberJoinedDate;
+    private javax.swing.JLabel memberLastName;
+    private javax.swing.JLabel memberPostCode;
     private javax.swing.JLabel memberValid;
     private javax.swing.JButton newBookingButton;
     private javax.swing.JButton newBookingCancelButton;
     private javax.swing.JButton newBookingConfirmButton;
     private javax.swing.JTextField newBookingDateInput;
     private javax.swing.JLabel newBookingDateLabel;
+    private javax.swing.JLabel newBookingFirstNameLabel;
     private javax.swing.JFrame newBookingFrame;
+    private javax.swing.JLabel newBookingJoinedInLabel;
+    private javax.swing.JLabel newBookingLastNameLabel;
     private javax.swing.JTextField newBookingMemberIdInput;
     private javax.swing.JLabel newBookingMemberIdLabel;
     private javax.swing.JTextField newBookingMemberNameInput;
     private javax.swing.JLabel newBookingMemberNameLabel;
     private javax.swing.JPanel newBookingPanel;
+    private javax.swing.JLabel newBookingPostCodeLabel;
     private javax.swing.JTextField newBookingTimeInput;
     private javax.swing.JLabel newBookingTimeLabel;
     private javax.swing.JLabel newBookingWarningMessage;
